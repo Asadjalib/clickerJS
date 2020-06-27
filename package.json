@@ -1,0 +1,23 @@
+{
+  "name": "clickerJS",
+  "version": "1.0.0",
+  "description": "A javascript focused implementation of clicker.io",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "gh-pages -d templates"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Asadjalib/clickerJS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Asadjalib/clickerJS/issues"
+  },
+  "homepage": "https://asadjalib.github.io/clickerJS",
+  "dependencies": {
+    "gh-pages": "^3.1.0"
+  }
+}
