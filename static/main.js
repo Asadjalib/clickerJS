@@ -11,6 +11,33 @@ let totals;
 let totalsMap;
 let maxClicks;
 
+// workspace
+
+let timestampIn;
+let timeStampInMap;
+let avgIn;
+let avgInConverted;
+
+// show clicks
+function showClicks() {
+  var myString = JSON.stringify(myClicks);
+  document.querySelector("#myClicks").innerHTML = myString;
+}
+
+// wait time
+timestampIn = myClicks.filter((c) => c.timestamp > 0);
+timestampInMap = timestampIn.map((i) => i.timestamp);
+avgIn =
+  (timestampInMap.reduce((a, b) => a + b) - myClicks[0].timestamp) /
+  timestampInMap.length;
+//convert
+avgInConverted = new Date(avgIn);
+
+// workspace END
+
+// COMPLETED START
+
+// increments the count
 function countUp() {
   counter++;
   id++;
@@ -24,17 +51,8 @@ function countUp() {
     total: counter,
   });
 
-  // // show clicks
-  // var myString = JSON.stringify(myClicks);
-  // document.querySelector("#myClicks").innerHTML = myString;
-
   // getMax
-  totals = myClicks.filter((c) => c.total > 0);
-  totalsMap = totals.map((i) => i.total);
-  maxClicks = totalsMap.reduce(function (a, b) {
-    return Math.max(a, b);
-  });
-  document.querySelector("#maxClicks").innerHTML = maxClicks;
+  const gettingMax = getMax();
 }
 
 // decrements the count
@@ -50,10 +68,6 @@ function countDown() {
     timestamp: timestamp,
     total: counter,
   });
-
-  // // show clicks
-  // var myString = JSON.stringify(myClicks);
-  // document.querySelector("#myClicks").innerHTML = myString;
 }
 
 // resets the counter
@@ -88,4 +102,14 @@ function checkTime(i) {
     i = "0" + i;
   } // add zero in front of numbers < 10
   return i;
+}
+
+// get max visits in the session
+function getMax() {
+  totals = myClicks.filter((c) => c.total > 0);
+  totalsMap = totals.map((i) => i.total);
+  maxClicks = totalsMap.reduce(function (a, b) {
+    return Math.max(a, b);
+  });
+  document.querySelector("#maxClicks").innerHTML = maxClicks;
 }
