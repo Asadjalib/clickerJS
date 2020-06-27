@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" type="text/css" href="..\static\styles.css" />
+  <script src="..\static\main.js"></script>
+  <style>
+    body {
+      font-family: "Lato", sans-serif;
+    }
+
+    .mySlides {
+      display: none;
+    }
+  </style>
+  <title>ClickerJS</title>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <div class="w3-top">
+    <div class="w3-bar w3-black w3-card">
+      <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)"
+        onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+      <a href="#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+      <a href="#stats" class="w3-bar-item w3-button w3-padding-large w3-hide-small">STATS</a>
+      <a href="#reset" class="w3-bar-item w3-button w3-padding-large w3-hide-small">RESET</a>
+      <a href="#email" class="w3-bar-item w3-button w3-padding-large w3-hide-small">FUN</a>
+      <a href="#time" class="w3-bar-item w3-button w3-padding-large w3-hide-small nav-font" style="float: right;">
+        <div id="txt"></div>
+      </a>
+
+      <body onload="startTime()"></body>
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="#" class="w3-bar-item w3-button">Merchandise</a>
+        <a href="#" class="w3-bar-item w3-button">Extras</a>
+        <a href="#" class="w3-bar-item w3-button">Media</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
+  <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+    <a href="#stats" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">STATS</a>
+    <a href="#reset" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">RESET</a>
+    <a href="#email" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">EMAIL</a>
+  </div>
+  <!-- Page content -->
+  <div class="w3-content" style="max-width:2000px;margin-top:46px">
+    <!-- The Clicker Section -->
+    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="home">
+      <h2 class="w3-wide">clicker.io</h2>
+      <p class="w3-opacity"><i>The World's Simplest Clicker</i></p>
+      <div class="button-holder">
+        <button class="button-in" id="in">In</button>
+        <button class="button-out" id="out">Out</button>
+      </div> 
+      <div id="counter" class="counter">0</div>
+      <!-- <p id="myClicks"></p> -->
+    </div>
+    <hr>
+    <!-- The Statistics Section -->
+    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="stats">
+      <h2 class="w3-wide"></h2>
+      <p class="w3-opacity"><i>statistics</i></p>
+      <p class="w3-justify">    
+        <div class="info-holder">
+          <table>
+            <tr>
+              <th>Average In</th>
+              <td>{{ avg_in}}</td>
+            </tr>
+            <tr>
+              <th>Average Out</th>
+              <td>{{ avg_out}}</td>
+            </tr>
+            <tr>
+              <th>Average Visit</th>
+              <td>{{ avg_visit}}</td>
+            </tr>
+            <tr>
+              <th>Max</th>
+              <td id="maxClicks">0<td>
+            </tr>
+          </table>
+        </div>
+      </p>
+    </div>
+    <hr>
+    <!-- Reset Session Session -->
+    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="reset">
+      <h2 class="w3-wide"></h2>
+      <p class="w3-opacity"><i>reset</i></p>
+      <p class="w3-justify">    
+        <div class="button-holder">
+            <button
+              id="reset"
+              class="button-other"
+              >
+              Reset Session
+            </button>
+        </div>
+      </p>
+    </div>
+    <hr>
+    
+    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="email">
+      <h2 class="w3-wide"></h2>
+      <p class="w3-opacity"><i>download session data</i></p>
+      <p class="w3-justify">    
+        <div class="button-holder">
+          <form action="/download" method="POST">
+            <input
+              type="text"
+              name="filename_1"
+              placeholder="name your file"
+              onfocus="this.placeholder = ''"
+              onblur="this.placeholder = 'name your file'"
+              required
+              pattern="[A-Za-z0-9]{0,100}"
+              title="Letters and Numbers Only"
+            />
+            <br />
+            <br />
+            <input type="submit" name="submit" value="Download" class="button-other" />
+          </form>
+        </div>
+      </p>
+    </div>
+    <hr>
+    
+    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="email">
+      <h2 class="w3-wide"></h2>
+      <p class="w3-opacity"><i>email report</i></p>
+      <p class="w3-justify">    
+        <div class="button-holder">
+          <form action="/email" method="POST">
+            <input
+              type="email"
+              name="email"
+              placeholder="enter your email"
+              onfocus="this.placeholder = ''"
+              onblur="this.placeholder = 'enter your email'"
+              required
+              autocomplete="on"
+            /><br /><br />
+            <input type="submit" name="submit" value="Send" class="button-other" />
+          </form>
+        </div>
+        <br />
+      </p>
+    </div>
+    <hr>
+    
+    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="charts">
+      <h2 class="w3-wide"></h2>
+      <p class="w3-opacity"><i>see the data</i></p>
+      <p class="w3-justify">    
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+    <p class="w3-medium">Powered by <a href="#" target="_blank">ZipLine</a></p>
+  </footer>
+
+  </div>
+
+  <!-- All I really need -->
+  <div class="button-holder">
+    <button id="in">In</button>
+    <button id="out">Out</button>
+    <button id="reset">Reset</button>
+  </div>
+</body>
+
+</html>
