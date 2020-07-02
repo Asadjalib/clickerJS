@@ -53,6 +53,24 @@ function countUp() {
 
   // getMax
   const gettingMax = getMax();
+  var myJSON = JSON.stringify(myClicks);
+  console.log(myJSON.items);
+
+  // const items = myJSON.items;
+  // console.log(myJSON.items);
+  // console.log(items);
+  // const replacer = (key, value) => (value === null ? "" : value); // specify how you want to handle null values here
+  // const header = Object.keys(items[0]);
+  // let csv = items.map((row) =>
+  //   header
+  //     .map((fieldName) => JSON.stringify(row[fieldName], replacer))
+  //     .join(",")
+  // );
+  // csv.unshift(header.join(","));
+  // csv = csv.join("\r\n");
+
+  // console.log(csv);
+  const x = showClicks();
 }
 
 // decrements the count
@@ -113,3 +131,5 @@ function getMax() {
   });
   document.querySelector("#maxClicks").innerHTML = maxClicks;
 }
+
+//convert to csv
