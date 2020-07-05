@@ -58,17 +58,29 @@ function countUp() {
   var myJSON = JSON.stringify(myClicks);
   console.log(myJSON.items);
   updateAverages();
-
 }
-function updateAverages(){
+function updateAverages() {
   showClicks();
   ins = arrayOfTimeDifference(myClicks, 1);
+  ins = ins * 100;
+  if (ins < 1) {
+    ins = ins.toFixed(0) + " Second";
+  } else if (ins > 1) {
+    ins = ins.toFixed(0) + " Seconds";
+  }
+
   outs = arrayOfTimeDifference(myClicks, 0);
+  outs = outs * 100;
+  if (outs < 1) {
+    outs = outs.toFixed(0) + " Second";
+  } else if (outs > 1) {
+    outs = outs.toFixed(0) + " Seconds";
+  }
+
   document.querySelector("#avgin").innerHTML = ins;
   document.querySelector("#avgout").innerHTML = outs;
-  avgv= ins - outs;
+  avgv = ins - outs;
   document.querySelector("avgv").innerHTML = avgv;
-
 }
 // decrements the count
 function countDown() {
@@ -126,24 +138,23 @@ function checkTime(i) {
 function convertTimeToMinutes(time) {
   var date = new Date(time);
   var m = date.getMinutes();
-  var h = date.getHours()*60;
-  var s = date.getSeconds()/60;
+  var h = date.getHours() * 60;
+  var s = date.getSeconds() / 60;
   return h + m + s;
 }
 function arrayOfTimeDifference(original, target) {
-  var temp = []
-  for(var i =0;i<original.length;i++){
-    if(original[i]["type"]==target){
-      temp.push(original[i])
+  var temp = [];
+  for (var i = 0; i < original.length; i++) {
+    if (original[i]["type"] == target) {
+      temp.push(original[i]);
     }
   }
   var difference = [];
   while (temp.length > 1) {
     base = convertTimeToMinutes(temp[0]["timestamp"]);
-    newtime=convertTimeToMinutes(temp[1]["timestamp"]);
+    newtime = convertTimeToMinutes(temp[1]["timestamp"]);
     difference.push(newtime - base);
     temp.splice(0, 1);
-    
   }
   return avgOfArray(difference);
 }
