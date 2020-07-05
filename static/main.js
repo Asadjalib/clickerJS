@@ -161,9 +161,9 @@ function msToTime(duration) {
   seconds = seconds < 10 ? "0" + seconds : seconds;
 
   return hours > 0
-    ? hours + " H" + minutes + " M" + seconds + " S"
+    ? hours + " H" + minutes + " M " + seconds + " S"
     : minutes > 0
-    ? minutes + " M" + seconds + " S"
+    ? minutes + " M " + seconds + " S"
     : seconds > 0
     ? seconds + " S"
     : 0;
