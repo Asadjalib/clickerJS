@@ -9,7 +9,7 @@ let myClicks = [];
 let id = 0;
 let totals;
 let totalsMap;
-let maxClicks;
+let maxClicks = 0;
 
 // workspace
 
@@ -40,6 +40,10 @@ avgInConverted = new Date(avgIn);
 // increments the count
 function countUp() {
   counter++;
+  if (counter > maxClicks) {
+    maxClicks = counter;
+  }
+  document.querySelector("#maxClicks").innerHTML = maxClicks;
   id++;
   document.querySelector("#counter").innerHTML = counter;
   var date = new Date();
@@ -51,16 +55,20 @@ function countUp() {
     total: counter,
   });
 
-  // getMax
-  const gettingMax = getMax();
   var myJSON = JSON.stringify(myClicks);
   console.log(myJSON.items);
   const x = showClicks();
+  var test = arrayOfTimeDifference(myClicks, 1);
+  console.log(myClicks[0]["timestamp"]);
 }
 
 // decrements the count
 function countDown() {
   counter--;
+  if (counter > maxClicks) {
+    maxClicks = counter;
+  }
+  document.querySelector("#maxClicks").innerHTML = maxClicks;
   id++;
   document.querySelector("#counter").innerHTML = counter;
   var date = new Date();
@@ -106,13 +114,34 @@ function checkTime(i) {
   } // add zero in front of numbers < 10
   return i;
 }
+function convertTimeToMinutes(time) {
+  var date = new Date(time);
+  var m = date.getMinutes();
+  var h = date.getHours();
+  var s = date.getSeconds();
+  return 60 * h + m + s / 60;
+}
+function arrayOfTimeDifference(original, target) {
+  base = convertTimeToMinutes(original[0]["timestamp"]);
+  var temp = original.slice(0);
+  var difference = [];
+  console.log(original);
+  while (temp.length > 1) {
+    if (temp[1]["type"] == target) {
+      difference.push(convertTimeToMinutes(temp[1]["timestamp"]) - base);
+      temp.splice(1, 1);
+    }
+  }
+  console.log(avgOfArray(difference));
+  console.log(difference);
+}
 
-// get max visits in the session
-function getMax() {
-  totals = myClicks.filter((c) => c.total > 0);
-  totalsMap = totals.map((i) => i.total);
-  maxClicks = totalsMap.reduce(function (a, b) {
-    return Math.max(a, b);
-  });
-  document.querySelector("#maxClicks").innerHTML = maxClicks;
+function avgOfArray(A) {
+  var sum = 0;
+  var counter = 0;
+  for (i = 0; i < A.length; i++) {
+    sum += A[i];
+    counter += 1;
+  }
+  return sum / counter;
 }
