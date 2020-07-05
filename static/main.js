@@ -9,7 +9,7 @@ let myClicks = [];
 let id = 0;
 let totals;
 let totalsMap;
-let maxClicks = 0;
+let peakClicks = 0;
 
 // Global Variables
 
@@ -31,10 +31,10 @@ function showClicks() {
 // increments the count
 function countUp() {
   counter++;
-  if (counter > maxClicks) {
-    maxClicks = counter;
+  if (counter > peakClicks) {
+    peakClicks = counter;
   }
-  document.querySelector("#maxClicks").innerHTML = maxClicks;
+  document.querySelector("#peakClicks").innerHTML = peakClicks;
   id++;
   document.querySelector("#counter").innerHTML = counter;
   var date = new Date();
@@ -65,10 +65,10 @@ function updateAverages() {
 // decrements the count
 function countDown() {
   counter--;
-  if (counter > maxClicks) {
-    maxClicks = counter;
+  if (counter > peakClicks) {
+    peakClicks = counter;
   }
-  document.querySelector("#maxClicks").innerHTML = maxClicks;
+  document.querySelector("#peakClicks").innerHTML = peakClicks;
   id++;
   document.querySelector("#counter").innerHTML = counter;
   var date = new Date();
