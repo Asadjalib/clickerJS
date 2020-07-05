@@ -11,7 +11,7 @@ let totals;
 let totalsMap;
 let maxClicks = 0;
 
-// workspace
+// Global Variables
 
 let timestampIn;
 let timeStampInMap;
@@ -23,15 +23,6 @@ function showClicks() {
   var myString = JSON.stringify(myClicks);
   document.querySelector("#myClicks").innerHTML = myString;
 }
-
-// wait time
-timestampIn = myClicks.filter((c) => c.timestamp > 0);
-timestampInMap = timestampIn.map((i) => i.timestamp);
-avgIn =
-  (timestampInMap.reduce((a, b) => a + b) - myClicks[0].timestamp) /
-  timestampInMap.length;
-//convert
-avgInConverted = new Date(avgIn);
 
 // workspace END
 
@@ -62,26 +53,15 @@ function countUp() {
 function updateAverages() {
   showClicks();
   ins = arrayOfTimeDifference(myClicks, 1);
-  ins = ins * 100;
-  if (ins < 1) {
-    ins = ins.toFixed(0) + " Second";
-  } else if (ins > 1) {
-    ins = ins.toFixed(0) + " Seconds";
-  }
-
+  ins = msToTime(ins);
   outs = arrayOfTimeDifference(myClicks, 0);
-  outs = outs * 100;
-  if (outs < 1) {
-    outs = outs.toFixed(0) + " Second";
-  } else if (outs > 1) {
-    outs = outs.toFixed(0) + " Seconds";
-  }
-
+  outs = msToTime(outs);
   document.querySelector("#avgin").innerHTML = ins;
   document.querySelector("#avgout").innerHTML = outs;
   avgv = ins - outs;
   document.querySelector("avgv").innerHTML = avgv;
 }
+
 // decrements the count
 function countDown() {
   counter--;
@@ -167,4 +147,24 @@ function avgOfArray(A) {
     counter += 1;
   }
   return sum / counter;
+}
+
+function msToTime(duration) {
+  duration = duration * 100000;
+  var milliseconds = parseInt((duration % 1000) / 100),
+    seconds = Math.floor((duration / 1000) % 60),
+    minutes = Math.floor((duration / (1000 * 60)) % 60),
+    hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+  hours = hours < 10 ? "0" + hours : hours;
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+
+  return hours > 0
+    ? hours + " H" + minutes + " M" + seconds + " S"
+    : minutes > 0
+    ? minutes + " M" + seconds + " S"
+    : seconds > 0
+    ? seconds + " S"
+    : 0;
 }
