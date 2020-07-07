@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector("#in").onclick = countUp;
   document.querySelector("#out").onclick = countDown;
   document.querySelector("#reset").onclick = reset;
+  document.querySelector("#undo").onclick = undo;
 });
 
 let counter = 0;
@@ -28,6 +29,24 @@ function showClicks() {
 
 // COMPLETED START
 
+function undo() {
+  myClicks.pop();
+  if (counter == peakClicks && counter > 0) {
+    peakClicks--;
+  }
+  if (myClicks.length == 0) {
+    counter = 0;
+  } else {
+    counter = myClicks[myClicks.length - 1]["total"];
+  }
+
+  document.querySelector("#peakClicks").innerHTML = peakClicks;
+  document.querySelector("#counter").innerHTML = counter;
+  var myJSON = JSON.stringify(myClicks);
+  console.log(myJSON.items);
+  updateAverages();
+}
+
 // increments the count
 function countUp() {
   counter++;
@@ -51,15 +70,13 @@ function countUp() {
   updateAverages();
 }
 function updateAverages() {
-  // showClicks();
+  showClicks();
   ins = arrayOfTimeDifference(myClicks, 1);
   ins = msToTime(ins);
   outs = arrayOfTimeDifference(myClicks, 0);
   outs = msToTime(outs);
   document.querySelector("#avgin").innerHTML = ins;
-  document.querySelector("#avgout").innerHTML = outs;
-  avgv = ins - outs;
-  document.querySelector("avgv").innerHTML = avgv;
+  document.querySelector("#avgvisit").innerHTML = outs;
 }
 
 // decrements the count
