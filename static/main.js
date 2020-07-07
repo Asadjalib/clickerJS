@@ -70,7 +70,7 @@ function countUp() {
   updateAverages();
 }
 function updateAverages() {
-  showClicks();
+  // showClicks();
   ins = arrayOfTimeDifference(myClicks, 1);
   ins = msToTime(ins);
   outs = arrayOfTimeDifference(myClicks, 0);
