@@ -65,13 +65,18 @@ function countDown() {
 
 // Resets The Counter
 function reset() {
+  avgIn=0;
+  avgOut=0;
+  avgInConverted=0;
   counter = 0;
-  document.querySelector("#counter").innerHTML = counter;
-  var date = new Date();
-  var timestamp = date.getTime();
+  peakClicks=0;
   myClicks = [];
-  var myString = JSON.stringify(myClicks);
-  document.querySelector("#myClicks").innerHTML = myString;
+  document.querySelector("#counter").innerHTML = counter;
+  document.querySelector("#peakClicks").innerHTML = peakClicks;
+  document.querySelector("#avgin").innerHTML = avgIn;
+  document.querySelector("#avgvisit").innerHTML = avgOut;
+  //var myString = JSON.stringify(myClicks);
+ // document.querySelector("#myClicks").innerHTML = myString;
 }
 
 // Undo Button
