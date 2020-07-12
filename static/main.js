@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector("#out").onclick = countDown;
   document.querySelector("#reset").onclick = reset;
   document.querySelector("#undo").onclick = undo;
+  document.querySelector("#downloadcsv").onclick= downloadFile;
 });
 
 // Global Variables
@@ -42,6 +43,22 @@ function countUp() {
   console.log(myJSON.items);
   updateAverages();
 }
+
+
+function downloadFile() {
+    var data = '"Column One","Column Two","Column Three"'
+
+
+    var aLink = document.createElement('a');
+    aLink.download = "Data.csv";
+    aLink.href = 'data:text/csv;charset=UTF-8,' + encodeURIComponent(data);
+
+    var event = new MouseEvent('click');
+    aLink.dispatchEvent(event);
+}
+
+
+
 
 // Decrements The Counter
 function countDown() {
