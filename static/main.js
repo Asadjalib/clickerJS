@@ -44,17 +44,28 @@ function countUp() {
   updateAverages();
 }
 
+function convertToArray(thingsToConvert){
+    var myClicksArray =[["id","type","timestamp","total"]];
+    thingsToConvert.forEach(function(item){
+        myClicksArray.push([item.id,item.type,item.timestamp,item.total])
+    })
+    return myClicksArray;
+}
+
 
 function downloadFile() {
-    var data = '"Column One","Column Two","Column Three"'
-
-
-    var aLink = document.createElement('a');
-    aLink.download = "Data.csv";
-    aLink.href = 'data:text/csv;charset=UTF-8,' + encodeURIComponent(data);
-
-    var event = new MouseEvent('click');
-    aLink.dispatchEvent(event);
+    var data2= convertToArray(myClicks);
+    let csvContent = "data:text/csv;charset=utf-8," 
+    data2.forEach(function(rowArray) {
+        let row = rowArray.join(",");
+        csvContent += row + "\r\n";
+    });
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "testme.csv");
+    document.body.appendChild(link); // Required for FF
+    link.click();
 }
 
 
