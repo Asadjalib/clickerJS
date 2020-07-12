@@ -1,3 +1,4 @@
+// Document Object Model (DOM) Manipulation
 document.addEventListener("DOMContentLoaded", function () {
   document.querySelector("#in").onclick = countUp;
   document.querySelector("#out").onclick = countDown;
@@ -5,49 +6,21 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector("#undo").onclick = undo;
 });
 
+// Global Variables
 let counter = 0;
 let myClicks = [];
 let id = 0;
 let totals;
 let totalsMap;
 let peakClicks = 0;
-
-// Global Variables
-
 let timestampIn;
 let timeStampInMap;
 let avgIn;
 let avgInConverted;
 
-// show clicks
-function showClicks() {
-  var myString = JSON.stringify(myClicks);
-  document.querySelector("#myClicks").innerHTML = myString;
-}
+// CORE FUNCTIONS
 
-// workspace END
-
-// COMPLETED START
-
-function undo() {
-  myClicks.pop();
-  if (counter == peakClicks && counter > 0) {
-    peakClicks--;
-  }
-  if (myClicks.length == 0) {
-    counter = 0;
-  } else {
-    counter = myClicks[myClicks.length - 1]["total"];
-  }
-
-  document.querySelector("#peakClicks").innerHTML = peakClicks;
-  document.querySelector("#counter").innerHTML = counter;
-  var myJSON = JSON.stringify(myClicks);
-  console.log(myJSON.items);
-  updateAverages();
-}
-
-// increments the count
+// Increment The Counter
 function countUp() {
   counter++;
   if (counter > peakClicks) {
@@ -69,17 +42,8 @@ function countUp() {
   console.log(myJSON.items);
   updateAverages();
 }
-function updateAverages() {
-  // showClicks();
-  ins = arrayOfTimeDifference(myClicks, 1);
-  ins = msToTime(ins);
-  outs = arrayOfTimeDifference(myClicks, 0);
-  outs = msToTime(outs);
-  document.querySelector("#avgin").innerHTML = ins;
-  document.querySelector("#avgvisit").innerHTML = outs;
-}
 
-// decrements the count
+// Decrements The Counter
 function countDown() {
   counter--;
   if (counter > peakClicks) {
@@ -99,7 +63,7 @@ function countDown() {
   updateAverages();
 }
 
-// resets the counter
+// Resets The Counter
 function reset() {
   counter = 0;
   document.querySelector("#counter").innerHTML = counter;
@@ -108,6 +72,69 @@ function reset() {
   myClicks = [];
   var myString = JSON.stringify(myClicks);
   document.querySelector("#myClicks").innerHTML = myString;
+}
+
+// Undo Button
+function undo() {
+  myClicks.pop();
+  if (counter == peakClicks && counter > 0) {
+    peakClicks--;
+  }
+  if (myClicks.length == 0) {
+    counter = 0;
+  } else {
+    counter = myClicks[myClicks.length - 1]["total"];
+  }
+  document.querySelector("#peakClicks").innerHTML = peakClicks;
+  document.querySelector("#counter").innerHTML = counter;
+  var myJSON = JSON.stringify(myClicks);
+  console.log(myJSON.items);
+  updateAverages();
+}
+
+// Download Session Data
+// Email Session Data
+
+// SUPPORTING FUNCTIONS
+
+// Turn milliseconds into appropriate statistic display
+function msToTime(duration) {
+  duration = duration * 100000;
+  var milliseconds = parseInt((duration % 1000) / 100),
+    seconds = Math.floor((duration / 1000) % 60),
+    minutes = Math.floor((duration / (1000 * 60)) % 60),
+    hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+  hours = hours < 10 ? "0" + hours : hours;
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+
+  return hours > 0
+    ? hours + " H" + minutes + " M " + seconds + " S"
+    : minutes > 0
+    ? minutes + " M " + seconds + " S"
+    : seconds > 0
+    ? seconds + " S"
+    : 0;
+}
+
+// show clicks
+function showClicks() {
+  var myString = JSON.stringify(myClicks);
+  document.querySelector("#myClicks").innerHTML = myString;
+}
+
+// workspace END
+
+// COMPLETED START
+
+function updateAverages() {
+  ins = arrayOfTimeDifference(myClicks, 1);
+  ins = msToTime(ins);
+  outs = arrayOfTimeDifference(myClicks, 0);
+  outs = msToTime(outs);
+  document.querySelector("#avgin").innerHTML = ins;
+  document.querySelector("#avgvisit").innerHTML = outs;
 }
 
 // functions for the clock
@@ -164,24 +191,4 @@ function avgOfArray(A) {
     counter += 1;
   }
   return sum / counter;
-}
-
-function msToTime(duration) {
-  duration = duration * 100000;
-  var milliseconds = parseInt((duration % 1000) / 100),
-    seconds = Math.floor((duration / 1000) % 60),
-    minutes = Math.floor((duration / (1000 * 60)) % 60),
-    hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-
-  hours = hours < 10 ? "0" + hours : hours;
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-  seconds = seconds < 10 ? "0" + seconds : seconds;
-
-  return hours > 0
-    ? hours + " H" + minutes + " M " + seconds + " S"
-    : minutes > 0
-    ? minutes + " M " + seconds + " S"
-    : seconds > 0
-    ? seconds + " S"
-    : 0;
 }
