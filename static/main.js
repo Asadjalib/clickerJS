@@ -44,47 +44,44 @@ function countUp() {
   updateAverages();
 }
 
-<<<<<<< HEAD
-function downloadFile() {
-  function getFileName() {
-    var text = document.getElementById("filename").value;
-  }
-  console.log(filename);
-  // var data = '"Column One","Column Two","Column Three"';
-=======
-function convertToArray(thingsToConvert){
-    var myClicksArray =[["id","type","timestamp","total"]];
-    thingsToConvert.forEach(function(item){
-        myClicksArray.push([item.id,item.type,item.timestamp,item.total])
-    })
-    return myClicksArray;
+// function downloadFile() {
+//   console.log(getFileName());
+//   // var data = '"Column One","Column Two","Column Three"';
+//   function convertToArray(thingsToConvert) {
+//     var myClicksArray = [["id", "type", "timestamp", "total"]];
+//     thingsToConvert.forEach(function (item) {
+//       myClicksArray.push([item.id, item.type, item.timestamp, item.total]);
+//     });
+//     return myClicksArray;
+//   }
+
+// Get download session data filename
+function getFileName() {
+  return document.getElementById("filename").value;
 }
 
-
 function downloadFile() {
-    var data2= convertToArray(myClicks);
-    let csvContent = "data:text/csv;charset=utf-8," 
-    data2.forEach(function(rowArray) {
-        let row = rowArray.join(",");
-        csvContent += row + "\r\n";
-    });
-    var encodedUri = encodeURI(csvContent);
-    var link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "testme.csv");
-    document.body.appendChild(link); // Required for FF
-    link.click();
+  var theirFileName = getFileName();
+  var data2 = convertToArray(myClicks);
+  let csvContent = "data:text/csv;charset=utf-8,";
+  data2.forEach(function (rowArray) {
+    let row = rowArray.join(",");
+    csvContent += row + "\r\n";
+  });
+  var encodedUri = encodeURI(csvContent);
+  var link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", theirFileName);
+  document.body.appendChild(link); // Required for FF
+  link.click();
 }
 
->>>>>>> d4c7e14f40464ac0b5f4a8147a687bb86ff53fc5
+// var aLink = document.createElement("a");
+// aLink.download = "Data.csv";
+// aLink.href = "data:text/csv;charset=UTF-8," + encodeURIComponent(data);
 
-  // var aLink = document.createElement("a");
-  // aLink.download = "Data.csv";
-  // aLink.href = "data:text/csv;charset=UTF-8," + encodeURIComponent(data);
-
-  // var event = new MouseEvent("click");
-  // aLink.dispatchEvent(event);
-}z
+// var event = new MouseEvent("click");
+// aLink.dispatchEvent(event);
 
 // Decrements The Counter
 function countDown() {
