@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector("#out").onclick = countDown;
   document.querySelector("#reset").onclick = reset;
   document.querySelector("#undo").onclick = undo;
-  document.querySelector("#downloadcsv").onclick= downloadFile;
+  document.querySelector("#downloadcsv").onclick = downloadFile;
 });
 
 // Global Variables
@@ -44,21 +44,20 @@ function countUp() {
   updateAverages();
 }
 
-
 function downloadFile() {
-    var data = '"Column One","Column Two","Column Three"'
+  function getFileName() {
+    var text = document.getElementById("filename").value;
+  }
+  console.log(filename);
+  // var data = '"Column One","Column Two","Column Three"';
 
+  // var aLink = document.createElement("a");
+  // aLink.download = "Data.csv";
+  // aLink.href = "data:text/csv;charset=UTF-8," + encodeURIComponent(data);
 
-    var aLink = document.createElement('a');
-    aLink.download = "Data.csv";
-    aLink.href = 'data:text/csv;charset=UTF-8,' + encodeURIComponent(data);
-
-    var event = new MouseEvent('click');
-    aLink.dispatchEvent(event);
-}
-
-
-
+  // var event = new MouseEvent("click");
+  // aLink.dispatchEvent(event);
+}z
 
 // Decrements The Counter
 function countDown() {
@@ -82,18 +81,18 @@ function countDown() {
 
 // Resets The Counter
 function reset() {
-  avgIn=0;
-  avgOut=0;
-  avgInConverted=0;
+  avgIn = 0;
+  avgOut = 0;
+  avgInConverted = 0;
   counter = 0;
-  peakClicks=0;
+  peakClicks = 0;
   myClicks = [];
   document.querySelector("#counter").innerHTML = counter;
   document.querySelector("#peakClicks").innerHTML = peakClicks;
   document.querySelector("#avgin").innerHTML = avgIn;
   document.querySelector("#avgvisit").innerHTML = avgOut;
   //var myString = JSON.stringify(myClicks);
- // document.querySelector("#myClicks").innerHTML = myString;
+  // document.querySelector("#myClicks").innerHTML = myString;
 }
 
 // Undo Button

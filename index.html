@@ -111,7 +111,7 @@
       <p class="w3-opacity"><i>download session data</i></p>
       <p class="w3-justify">    
         <div class="button-holder">
-          <form action="/download" method="POST">
+          <!-- <form action="/download" method="POST"> -->
             <input
               type="text"
               name="filename_1"
@@ -121,11 +121,12 @@
               required
               pattern="[A-Za-z0-9]{0,100}"
               title="Letters and Numbers Only"
+              id="filename"
             />
             <br />
             <br />
             <input type="submit" name="submit" value="Download" class="button-other" id="downloadcsv"/>
-          </form>
+          <!-- </form> -->
         </div>
       </p>
     </div>
