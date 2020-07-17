@@ -33,19 +33,19 @@
   text-decoration: none;
   outline: none;
   color: #fff;
-  background-color: white;
-  border: black solid 1px;
+  background-color: black;
+  border: none;
   box-shadow: 0 9px #999;
   margin-right: 5px;
   margin-bottom: 50px;
 }
 
 .button-undo:hover {
-  background-color: grey;
+  background-color: rgb(150, 150, 150, 0.5);
 }
 
 .button-undo:active {
-  background-color: white;
+  background-color: rgb(150, 150, 150);
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
