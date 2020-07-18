@@ -114,9 +114,11 @@ function undo() {
   myClicks.pop();
   if (counter == peakClicks && counter > 0) {
     peakClicks--;
+    id--;
   }
   if (myClicks.length == 0) {
     counter = 0;
+    id = 0;
   } else {
     counter = myClicks[myClicks.length - 1]["total"];
   }
