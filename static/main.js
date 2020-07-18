@@ -30,11 +30,64 @@ function countUp() {
   document.querySelector("#peakClicks").innerHTML = peakClicks;
   id++;
   document.querySelector("#counter").innerHTML = counter;
-  createInstance(1);
+  recordClick(1);
   updateAverages();
 }
 
-function createInstance(clickType) {
+// Decrements The Counter
+function countDown() {
+  if (counter != 0) {
+    counter--;
+    if (counter > peakClicks) {
+      peakClicks = counter;
+    }
+    document.querySelector("#peakClicks").innerHTML = peakClicks;
+    id++;
+    document.querySelector("#counter").innerHTML = counter;
+    recordClick(0);
+    updateAverages();
+  }
+}
+
+// Resets The Counter
+function reset() {
+  avgIn = 0;
+  avgOut = 0;
+  avgInConverted = 0;
+  counter = 0;
+  peakClicks = 0;
+  id = 0;
+  myClicks = [];
+  document.querySelector("#counter").innerHTML = counter;
+  document.querySelector("#peakClicks").innerHTML = peakClicks;
+  document.querySelector("#avgIn").innerHTML = avgIn;
+  document.querySelector("#avgVisit").innerHTML = avgOut;
+  //var myString = JSON.stringify(myClicks);
+  // document.querySelector("#myClicks").innerHTML = myString;
+}
+
+// Undo Button
+function undo() {
+  myClicks.pop();
+  if (counter == peakClicks && counter > 0) {
+    peakClicks--;
+    id--;
+  }
+  if (myClicks.length == 0) {
+    counter = 0;
+    id = 0;
+  } else {
+    counter = myClicks[myClicks.length - 1]["total"];
+  }
+  document.querySelector("#peakClicks").innerHTML = peakClicks;
+  document.querySelector("#counter").innerHTML = counter;
+  var myJSON = JSON.stringify(myClicks);
+  console.log(myJSON.items);
+  updateAverages();
+}
+
+// Records a Click
+function recordClick(clickType) {
   var date = new Date();
   var timestamp = date.getTime();
   var today = new Date();
@@ -83,58 +136,6 @@ function downloadFile() {
   link.setAttribute("download", getFileName() + ".csv");
   document.body.appendChild(link);
   link.click();
-}
-
-// Decrements The Counter
-function countDown() {
-  if (counter != 0) {
-    counter--;
-    if (counter > peakClicks) {
-      peakClicks = counter;
-    }
-    document.querySelector("#peakClicks").innerHTML = peakClicks;
-    id++;
-    document.querySelector("#counter").innerHTML = counter;
-    createInstance(0);
-    updateAverages();
-  }
-}
-
-// Resets The Counter
-function reset() {
-  avgIn = 0;
-  avgOut = 0;
-  avgInConverted = 0;
-  counter = 0;
-  peakClicks = 0;
-  id = 0;
-  myClicks = [];
-  document.querySelector("#counter").innerHTML = counter;
-  document.querySelector("#peakClicks").innerHTML = peakClicks;
-  document.querySelector("#avgIn").innerHTML = avgIn;
-  document.querySelector("#avgVisit").innerHTML = avgOut;
-  //var myString = JSON.stringify(myClicks);
-  // document.querySelector("#myClicks").innerHTML = myString;
-}
-
-// Undo Button
-function undo() {
-  myClicks.pop();
-  if (counter == peakClicks && counter > 0) {
-    peakClicks--;
-    id--;
-  }
-  if (myClicks.length == 0) {
-    counter = 0;
-    id = 0;
-  } else {
-    counter = myClicks[myClicks.length - 1]["total"];
-  }
-  document.querySelector("#peakClicks").innerHTML = peakClicks;
-  document.querySelector("#counter").innerHTML = counter;
-  var myJSON = JSON.stringify(myClicks);
-  console.log(myJSON.items);
-  updateAverages();
 }
 
 // Download Session Data
