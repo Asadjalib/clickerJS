@@ -1,3 +1,7 @@
+* {
+  border: 1px solid red;
+}
+
 .button-in {
   display: inline-block;
   padding: 15px 35px;
@@ -171,5 +175,13 @@ td {
 }
 
 ::-webkit-input-placeholder {
+  text-align: center;
+}
+
+.stats-table {
+  text-align: left;
+}
+
+#peakClicks {
   text-align: center;
 }

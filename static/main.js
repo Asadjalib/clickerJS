@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector("#out").onclick = countDown;
   document.querySelector("#reset").onclick = reset;
   document.querySelector("#undo").onclick = undo;
-  document.querySelector("#downloadcsv").onclick = downloadFile;
+  document.querySelector("#downloadCsv").onclick = downloadFile;
 });
 
 // Global Variables
@@ -32,22 +32,32 @@ function countUp() {
   document.querySelector("#counter").innerHTML = counter;
   var date = new Date();
   var timestamp = date.getTime();
+  var today = new Date();
+  var date =
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+  var time =
+    today.getHours() +
+    ":" +
+    today.getMinutes() +
+    ":" +
+    today.getSeconds() +
+    ":" +
+    today.getMilliseconds();
+  var dateTime = time;
   myClicks.push({
     id: id,
     type: 1,
     timestamp: timestamp,
+    actualTime: dateTime,
     total: counter,
   });
-
-  var myJSON = JSON.stringify(myClicks);
-  console.log(myJSON.items);
   updateAverages();
 }
 
 function convertToArray(thingsToConvert) {
-  var myClicksArray = [["id", "type", "timestamp", "total"]];
+  var myClicksArray = [["Id", "Type", "Time", "Total"]];
   thingsToConvert.forEach(function (item) {
-    myClicksArray.push([item.id, item.type, item.timestamp, item.total]);
+    myClicksArray.push([item.id, item.type, item.actualTime, item.total]);
   });
   return myClicksArray;
 }
@@ -104,8 +114,8 @@ function reset() {
   myClicks = [];
   document.querySelector("#counter").innerHTML = counter;
   document.querySelector("#peakClicks").innerHTML = peakClicks;
-  document.querySelector("#avgin").innerHTML = avgIn;
-  document.querySelector("#avgvisit").innerHTML = avgOut;
+  document.querySelector("#avgIn").innerHTML = avgIn;
+  document.querySelector("#avgVisit").innerHTML = avgOut;
   //var myString = JSON.stringify(myClicks);
   // document.querySelector("#myClicks").innerHTML = myString;
 }
@@ -147,13 +157,16 @@ function msToTime(duration) {
   minutes = minutes < 10 ? "0" + minutes : minutes;
   seconds = seconds < 10 ? "0" + seconds : seconds;
 
-  return hours > 0
-    ? hours + " H" + minutes + " M " + seconds + " S"
-    : minutes > 0
-    ? minutes + " M " + seconds + " S"
-    : seconds > 0
-    ? seconds + " S"
-    : 0;
+  // return hours > 0
+  //   ? hours + " H " + minutes + " M " + seconds + " S"
+  //   : minutes > 0
+  //   ? minutes + " M " + seconds + " S"
+  //   : seconds > 0
+  //   ? seconds + " S"
+  //   : 0;
+  return seconds > 0
+    ? hours + "h " + minutes + "m " + seconds + "s"
+    : "00" + "h " + "00" + "m " + "00" + "s";
 }
 
 // show clicks
@@ -171,8 +184,8 @@ function updateAverages() {
   ins = msToTime(ins);
   outs = arrayOfTimeDifference(myClicks, 0);
   outs = msToTime(outs);
-  document.querySelector("#avgin").innerHTML = ins;
-  document.querySelector("#avgvisit").innerHTML = outs;
+  document.querySelector("#avgIn").innerHTML = ins;
+  document.querySelector("#avgVisit").innerHTML = outs;
 }
 
 // functions for the clock
@@ -184,7 +197,7 @@ function startTime() {
   m = checkTime(m);
   s = checkTime(s);
   var suf = "AM";
-  if (h >= 12) {
+  if (h >= 13) {
     h = h - 12;
     suf = "PM";
   }
@@ -214,8 +227,8 @@ function arrayOfTimeDifference(original, target) {
   var difference = [];
   while (temp.length > 1) {
     base = convertTimeToMinutes(temp[0]["timestamp"]);
-    newtime = convertTimeToMinutes(temp[1]["timestamp"]);
-    difference.push(newtime - base);
+    newTime = convertTimeToMinutes(temp[1]["timestamp"]);
+    difference.push(newTime - base);
     temp.splice(0, 1);
   }
   return avgOfArray(difference);

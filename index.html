@@ -25,22 +25,16 @@
   <!-- Navbar -->
   <div class="w3-top">
     <div class="w3-bar w3-black w3-card">
-      <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)"
-        onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-      <a href="#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+      <!-- <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)"
+        onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a> -->
+      <a href="#" class="w3-bar-item w3-button w3-padding-large">MAIN</a>
       <a href="#stats" class="w3-bar-item w3-button w3-padding-large w3-hide-small">STATS</a>
       <a href="#reset" class="w3-bar-item w3-button w3-padding-large w3-hide-small">RESET</a>
-      <a href="#email" class="w3-bar-item w3-button w3-padding-large w3-hide-small">FUN</a>
+      <a href="#download" class="w3-bar-item w3-button w3-padding-large w3-hide-small">DOWNLOAD</a>
       <a href="#time" class="w3-bar-item w3-button w3-padding-large w3-hide-small nav-font" style="float: right;">
         <div id="txt"></div>
       </a>
-
       <body onload="startTime()"></body>
-      <div class="w3-dropdown-content w3-bar-block w3-card-4">
-        <a href="#" class="w3-bar-item w3-button">Merchandise</a>
-        <a href="#" class="w3-bar-item w3-button">Extras</a>
-        <a href="#" class="w3-bar-item w3-button">Media</a>
-      </div>
     </div>
   </div>
 
@@ -71,18 +65,18 @@
       <p class="w3-opacity"><i>statistics</i></p>
       <p class="w3-justify">    
         <div class="info-holder">
-          <table>
+          <table class="stats-table">
             <tr>
               <th>Average In</th>
-              <td id="avgin"></td>
+              <td id="avgIn">00h 00m 00s</td>
             </tr>
             <tr>
               <th>Average Visit</th>
-              <td id="avgvisit"></td>
+              <td id="avgVisit">00h 00m 00s</td>
             </tr>
             <tr>
               <th>Peak</th>
-              <td id="peakClicks"><td>
+              <td id="peakClicks">0</td>
             </tr>
           </table>
         </div>
@@ -106,7 +100,7 @@
     </div>
     <hr>
     
-    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="email">
+    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="download">
       <h2 class="w3-wide"></h2>
       <p class="w3-opacity"><i>download session data</i></p>
       <p class="w3-justify">    
@@ -125,7 +119,7 @@
             />
             <br />
             <br />
-            <input type="submit" name="submit" value="Download" class="button-other" id="downloadcsv"/>
+            <input type="submit" name="submit" value="Download" class="button-other" id="downloadCsv"/>
         </div></div>
       </p>
     </div>
