@@ -100,6 +100,7 @@ function reset() {
   avgInConverted = 0;
   counter = 0;
   peakClicks = 0;
+  id = 0;
   myClicks = [];
   document.querySelector("#counter").innerHTML = counter;
   document.querySelector("#peakClicks").innerHTML = peakClicks;
