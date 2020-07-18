@@ -14,10 +14,6 @@ let id = 0;
 let totals;
 let totalsMap;
 let peakClicks = 0;
-let timestampIn;
-let timeStampInMap;
-let avgIn;
-let avgInConverted;
 
 // CORE FUNCTIONS
 
@@ -62,8 +58,6 @@ function reset() {
   document.querySelector("#peakClicks").innerHTML = peakClicks;
   document.querySelector("#avgIn").innerHTML = avgIn;
   document.querySelector("#avgVisit").innerHTML = avgOut;
-  //var myString = JSON.stringify(myClicks);
-  // document.querySelector("#myClicks").innerHTML = myString;
 }
 
 // Undo Button
@@ -86,96 +80,7 @@ function undo() {
   updateAverages();
 }
 
-// Records a Click
-function recordClick(clickType) {
-  var date = new Date();
-  var timestamp = date.getTime();
-  var today = new Date();
-  var date =
-    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-  var time =
-    today.getHours() +
-    ":" +
-    today.getMinutes() +
-    ":" +
-    today.getSeconds() +
-    ":" +
-    today.getMilliseconds();
-  var dateTime = time;
-  myClicks.push({
-    id: id,
-    type: clickType,
-    timestamp: timestamp,
-    actualTime: dateTime,
-    total: counter,
-  });
-}
-
-function convertToArray(thingsToConvert) {
-  var myClicksArray = [["Id", "Type", "Time", "Total"]];
-  thingsToConvert.forEach(function (item) {
-    myClicksArray.push([item.id, item.type, item.actualTime, item.total]);
-  });
-  return myClicksArray;
-}
-
-function getFileName() {
-  return document.getElementById("filename").value;
-}
-
-function downloadFile() {
-  var data2 = convertToArray(myClicks);
-  let csvContent = "data:text/csv;charset=utf-8,";
-  data2.forEach(function (rowArray) {
-    let row = rowArray.join(",");
-    csvContent += row + "\r\n";
-  });
-  var encodedUri = encodeURI(csvContent);
-  var link = document.createElement("a");
-  link.setAttribute("href", encodedUri);
-  link.setAttribute("download", getFileName() + ".csv");
-  document.body.appendChild(link);
-  link.click();
-}
-
-// Download Session Data
-// Email Session Data
-
 // SUPPORTING FUNCTIONS
-
-// Turn milliseconds into appropriate statistic display
-function msToTime(duration) {
-  duration = duration * 100000;
-  var milliseconds = parseInt((duration % 1000) / 100),
-    seconds = Math.floor((duration / 1000) % 60),
-    minutes = Math.floor((duration / (1000 * 60)) % 60),
-    hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-
-  hours = hours < 10 ? "0" + hours : hours;
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-  seconds = seconds < 10 ? "0" + seconds : seconds;
-
-  // return hours > 0
-  //   ? hours + " H " + minutes + " M " + seconds + " S"
-  //   : minutes > 0
-  //   ? minutes + " M " + seconds + " S"
-  //   : seconds > 0
-  //   ? seconds + " S"
-  //   : 0;
-  return seconds > 0
-    ? hours + "h " + minutes + "m " + seconds + "s"
-    : "00" + "h " + "00" + "m " + "00" + "s";
-}
-
-// show clicks
-function showClicks() {
-  var myString = JSON.stringify(myClicks);
-  document.querySelector("#myClicks").innerHTML = myString;
-}
-
-// workspace END
-
-// COMPLETED START
 
 function updateAverages() {
   ins = arrayOfTimeDifference(myClicks, 1);
@@ -240,4 +145,87 @@ function avgOfArray(A) {
     counter += 1;
   }
   return sum / counter;
+}
+
+// Records a Click
+function recordClick(clickType) {
+  var date = new Date();
+  var timestamp = date.getTime();
+  var today = new Date();
+  var date =
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+  var time =
+    today.getHours() +
+    ":" +
+    today.getMinutes() +
+    ":" +
+    today.getSeconds() +
+    ":" +
+    today.getMilliseconds();
+  var dateTime = time;
+  myClicks.push({
+    id: id,
+    type: clickType,
+    timestamp: timestamp,
+    actualTime: dateTime,
+    total: counter,
+  });
+}
+
+function convertToArray(thingsToConvert) {
+  var myClicksArray = [["Id", "Type", "Time", "Total"]];
+  thingsToConvert.forEach(function (item) {
+    myClicksArray.push([item.id, item.type, item.actualTime, item.total]);
+  });
+  return myClicksArray;
+}
+
+// Gets user input for their file name, for the download button
+function getFileName() {
+  return document.getElementById("filename").value;
+}
+
+function downloadFile() {
+  var data2 = convertToArray(myClicks);
+  let csvContent = "data:text/csv;charset=utf-8,";
+  data2.forEach(function (rowArray) {
+    let row = rowArray.join(",");
+    csvContent += row + "\r\n";
+  });
+  var encodedUri = encodeURI(csvContent);
+  var link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", getFileName() + ".csv");
+  document.body.appendChild(link);
+  link.click();
+}
+
+// Turn milliseconds into appropriate statistic display
+function msToTime(duration) {
+  duration = duration * 100000;
+  var milliseconds = parseInt((duration % 1000) / 100),
+    seconds = Math.floor((duration / 1000) % 60),
+    minutes = Math.floor((duration / (1000 * 60)) % 60),
+    hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+  hours = hours < 10 ? "0" + hours : hours;
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+
+  // return hours > 0
+  //   ? hours + " H " + minutes + " M " + seconds + " S"
+  //   : minutes > 0
+  //   ? minutes + " M " + seconds + " S"
+  //   : seconds > 0
+  //   ? seconds + " S"
+  //   : 0;
+  return seconds > 0
+    ? hours + "h " + minutes + "m " + seconds + "s"
+    : "00" + "h " + "00" + "m " + "00" + "s";
+}
+
+// show clicks
+function showClicks() {
+  var myString = JSON.stringify(myClicks);
+  document.querySelector("#myClicks").innerHTML = myString;
 }
