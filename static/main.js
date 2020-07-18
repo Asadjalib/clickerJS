@@ -30,6 +30,11 @@ function countUp() {
   document.querySelector("#peakClicks").innerHTML = peakClicks;
   id++;
   document.querySelector("#counter").innerHTML = counter;
+  createInstance(1);
+  updateAverages();
+}
+
+function createInstance(clickType) {
   var date = new Date();
   var timestamp = date.getTime();
   var today = new Date();
@@ -46,12 +51,11 @@ function countUp() {
   var dateTime = time;
   myClicks.push({
     id: id,
-    type: 1,
+    type: clickType,
     timestamp: timestamp,
     actualTime: dateTime,
     total: counter,
   });
-  updateAverages();
 }
 
 function convertToArray(thingsToConvert) {
@@ -91,14 +95,7 @@ function countDown() {
     document.querySelector("#peakClicks").innerHTML = peakClicks;
     id++;
     document.querySelector("#counter").innerHTML = counter;
-    var date = new Date();
-    var timestamp = date.getTime();
-    myClicks.push({
-      id: id,
-      type: 0,
-      timestamp: timestamp,
-      total: counter,
-    });
+    createInstance(0);
     updateAverages();
   }
 }
