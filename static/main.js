@@ -229,3 +229,22 @@ function showClicks() {
   var myString = JSON.stringify(myClicks);
   document.querySelector("#myClicks").innerHTML = myString;
 }
+
+var email = "foodforalltest@gmail.com";
+var pass = "welovefood";
+client.UseDefaultCredentials = false;
+client.EnableSsl = true;
+
+// Send Email
+function sendEmail() {
+  Email.send({
+    Host: "smtp.gmail.com",
+    Username: email,
+    Password: pass,
+    To: "asad.jalib@gmail.com",
+    From: email,
+    Subject: "Test Email",
+    Body: "This is a test email.",
+  }).then((message) => alert("Mail Sent Successfully"));
+  console.log(email);
+}

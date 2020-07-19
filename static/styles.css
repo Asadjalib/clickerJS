@@ -3,7 +3,11 @@
 } */
 
 * {
+<<<<<<< HEAD
   touch-action: none;
+=======
+  touch-action: manipulation;
+>>>>>>> 5b7091908de3c1422f00e02a17b9b9adaa9682c4
 }
 
 .button-in {
