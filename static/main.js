@@ -7,18 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector("#downloadCsv").onclick = downloadFile;
 });
 
-function getConfirmation() {
-  var retVal = confirm(
-    "Are you sure you would like to reset? All click data will be lost."
-  );
-  if (retVal == true) {
-    reset();
-    return true;
-  } else {
-    return false;
-  }
-}
-
 // Global Variables
 let counter = 0;
 let myClicks = [];
@@ -66,10 +54,10 @@ function reset() {
   peakClicks = 0;
   id = 0;
   myClicks = [];
-  document.querySelector("#counter").innerHTML = counter;
-  document.querySelector("#peakClicks").innerHTML = peakClicks;
-  document.querySelector("#avgIn").innerHTML = avgIn;
-  document.querySelector("#avgVisit").innerHTML = avgOut;
+  document.querySelector("#counter").innerHTML = 0;
+  document.querySelector("#peakClicks").innerHTML = 0;
+  document.querySelector("#avgIn").innerHTML = "00h 00m 00s";
+  document.querySelector("#avgVisit").innerHTML = "00h 00m 00s";
 }
 
 // Undo Button
@@ -93,6 +81,19 @@ function undo() {
 }
 
 // SUPPORTING FUNCTIONS
+
+// Gets confirmation when reset button is clicked
+function getConfirmation() {
+  var retVal = confirm(
+    "Are you sure you would like to reset? All click data will be lost."
+  );
+  if (retVal == true) {
+    reset();
+    return true;
+  } else {
+    return false;
+  }
+}
 
 function updateAverages() {
   ins = arrayOfTimeDifference(myClicks, 1);
@@ -244,21 +245,24 @@ function showClicks() {
   document.querySelector("#myClicks").innerHTML = myString;
 }
 
-var email = "foodforalltest@gmail.com";
-var pass = "welovefood";
-client.UseDefaultCredentials = false;
-client.EnableSsl = true;
+// var email = "foodforalltest@gmail.com";
+// var pass = "welovefood";
+// client.UseDefaultCredentials = false;
+// client.EnableSsl = true;
 
-// Send Email
-function sendEmail() {
-  Email.send({
-    Host: "smtp.gmail.com",
-    Username: email,
-    Password: pass,
-    To: "asad.jalib@gmail.com",
-    From: email,
-    Subject: "Test Email",
-    Body: "This is a test email.",
-  }).then((message) => alert("Mail Sent Successfully"));
-  console.log(email);
-}
+// // Send Email
+// function sendEmail() {
+//   Email.send({
+//     Host: "smtp.gmail.com",
+//     Username: email,
+//     Password: pass,
+//     To: "asad.jalib@gmail.com",
+//     From: email,
+//     Subject: "Test Email",
+//     Body: "This is a test email.",
+//   }).then((message) => alert("Mail Sent Successfully"));
+//   console.log(email);
+// }
+
+// Creating hotkeys using Mousetrap
+Mousetrap.bind("s", countUp);
