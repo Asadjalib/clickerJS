@@ -6,6 +6,9 @@
   touch-action: none;
 }
 
+html {
+  scroll-behavior: smooth;
+}
 .button-in {
   display: inline-block;
   padding: 15px 35px;
