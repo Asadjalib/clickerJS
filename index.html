@@ -60,7 +60,10 @@
         <button class="button-in" id="in">In</button>
         <button class="button-out" id="out">Out</button>
       </div> 
+      <div class="button-holder">
       <button class="button-undo" id="undo">Undo</button>
+      <button class="button-undo" id="reset">Reset</button>
+      </div>
       <div id="counter" class="counter">0</div>
       <p id="myClicks"></p>
     </div>
@@ -72,16 +75,19 @@
       <p class="w3-justify">    
         <div class="info-holder">
           <table class="stats-table">
-            <tr>
-              <th>Average In</th>
+            <tr>   
+              <th class="tooltip">Average In
+              <span class="tooltiptext">The time between each walk-in.</span></th>
               <td id="avgIn">00h 00m 00s</td>
             </tr>
             <tr>
-              <th>Average Visit</th>
+              <th class="tooltip">Average Visit
+              <span class="tooltiptext">The amount of time each person stays inside.</span></th>
               <td id="avgVisit">00h 00m 00s</td>
             </tr>
             <tr>
-              <th>Peak</th>
+              <th class="tooltip">Peak
+                <span class="tooltiptext">The max people inside in this session.</span></th>
               <td id="peakClicks">0</td>
             </tr>
           </table>
@@ -89,7 +95,7 @@
       </p>
     </div>
     <hr>
-    <!-- Reset Session Session -->
+    <!-- Reset Session Session
     <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="reset">
       <h2 class="w3-wide"></h2>
       <p class="w3-opacity"><i>reset</i></p>
@@ -104,7 +110,7 @@
         </div>
       </p>
     </div>
-    <hr>
+    <hr> -->
     
     <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="download">
       <h2 class="w3-wide"></h2>
