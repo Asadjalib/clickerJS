@@ -2,10 +2,22 @@
 document.addEventListener("DOMContentLoaded", function () {
   document.querySelector("#in").onclick = countUp;
   document.querySelector("#out").onclick = countDown;
-  document.querySelector("#reset").onclick = reset;
+  document.querySelector("#reset").onclick = getConfirmation;
   document.querySelector("#undo").onclick = undo;
   document.querySelector("#downloadCsv").onclick = downloadFile;
 });
+
+function getConfirmation() {
+  var retVal = confirm(
+    "Are you sure you would like to reset? All click data will be lost."
+  );
+  if (retVal == true) {
+    reset();
+    return true;
+  } else {
+    return false;
+  }
+}
 
 // Global Variables
 let counter = 0;
