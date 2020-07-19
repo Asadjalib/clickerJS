@@ -182,7 +182,9 @@ function convertToArray(thingsToConvert) {
 
 // Gets user input for their file name, for the download button
 function getFileName() {
-  return document.getElementById("filename").value;
+  return document.getElementById("filename").value
+    ? document.getElementById("filename").value
+    : "YourAwesomeFile";
 }
 
 function downloadFile() {
