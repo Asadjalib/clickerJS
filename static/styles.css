@@ -135,6 +135,7 @@ li a:hover {
   font-size: 30px;
   font-weight: bold;
   margin-top: 10px;
+  transform: translateY(30px);
 }
 
 .button-other {
