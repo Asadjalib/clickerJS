@@ -246,3 +246,7 @@ td {
   width: 250px;
   text-align: center;
 }
+
+a {
+  text-decoration: none;
+}
