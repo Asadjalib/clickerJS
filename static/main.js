@@ -245,8 +245,8 @@ function showClicks() {
   document.querySelector("#myClicks").innerHTML = myString;
 }
 
-// var email = "foodforalltest@gmail.com";
-// var pass = "welovefood";
+// var email = "--";
+// var pass = "--";
 // client.UseDefaultCredentials = false;
 // client.EnableSsl = true;
 
@@ -256,7 +256,7 @@ function showClicks() {
 //     Host: "smtp.gmail.com",
 //     Username: email,
 //     Password: pass,
-//     To: "asad.jalib@gmail.com",
+//     To: "ENTER GMAIL",
 //     From: email,
 //     Subject: "Test Email",
 //     Body: "This is a test email.",
